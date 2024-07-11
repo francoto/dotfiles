@@ -1,0 +1,26 @@
+[user]
+	email = tom.francois@lapp.in2p3.fr
+	name = Tom François
+	
+[core]
+attributesfile = ~/.gitattributes_global
+	editor = vim
+
+[filter "nbstrip_full"]
+clean = "jq --indent 1 \
+        '(.cells[] | select(has(\"outputs\")) | .outputs) = []  \
+        | (.cells[] | select(has(\"execution_count\")) | .execution_count) = null  \
+        | .metadata = {\"language_info\": {\"name\": \"python\", \"pygments_lexer\": \"ipython3\"}} \
+        | .cells[].metadata = {} \
+        '"
+smudge = cat
+required = true
+
+[includeIf "gitdir:~/perso/"] 
+  path = .gitconfig-perso
+[includeIf "gitdir:~/repos/github.com/"] 
+  path = .gitconfig-github
+[includeIf "gitdir:~/repos/gitlab.com/"] 
+  path = .gitconfig-gitlab
+[init]
+	defaultBranch = main
