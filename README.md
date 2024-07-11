@@ -1,4 +1,4 @@
-#README
+# README
 
 This repo contains the config files I use in my Linux distribs
 
